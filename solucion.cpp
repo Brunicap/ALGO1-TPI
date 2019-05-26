@@ -58,7 +58,11 @@ grilla construirGrilla(gps esq1, gps esq2, int n, int m) {
 
 /***************************************** EJERCICIO aPalabra **********************************/
 vector<nombre> aPalabra(recorrido t, grilla g) {
-
+        vector<nombre> palabra;
+        for (int i = 0; i < t.size() ; ++i) {
+            palabra.push_back(nombreEnGrilla(t[i],g));
+        }
+        return palabra;
 }
 
 /************************************* EJERCICIO cantidadDeSaltos ******************************/

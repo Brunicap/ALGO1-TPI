@@ -32,6 +32,19 @@ nombre obtenerNombre(celda c) {
     return get<2>(c);
 }
 
+nombre nombreEnGrilla (gps posicion, grilla g){
+    double latitudPos = obtenerLatitud(posicion);
+    double longitudPos = obtenerLongitud(posicion);
+    nombre res;
+
+    for (int i = 0; i < g.size() ; ++i) {
+        if((latitudPos == get<0> g[i]) && (longitudPos == get<1> g[i])){
+            res = get<2> g[i];
+        }
+    }
+    return res;
+}
+
 double velocidad(tuple<tiempo,gps> p1 , tuple<tiempo,gps> p2){
      return ((distEnKM(obtenerPosicion(p1),obtenerPosicion(p2))) / (obtenerTiempo(p1) - obtenerTiempo(p2)));
 }
