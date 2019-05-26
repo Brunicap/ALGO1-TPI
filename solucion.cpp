@@ -18,11 +18,22 @@ void escribirRecorridos(vector<recorrido> recorridos, string nombreArchivo){
 /*****************************+***** EJERCICIO excesoDeVelocidad **********************************/
 bool excesoDeVelocidad(viaje v) {
 
+    //  !!faltaria ordenar v!!.
+
+    int i = 1;
+    while( i < v.size() && (velocidad(v[i-1],v[i])) < 80.0 ) ){
+            i++;
+            }
+    return i < v.size();
 }
 
 /******++++**************************** EJERCICIO tiempoTotal ***********+++***********************/
 tiempo tiempoTotal(viaje v) {
+    double max = maximoTiempo(v);
+    double min = minimoTiempo(v);
+    double res = max - min;
 
+    return  res;
 }
 
 /************++*********************** EJERCICIO distanciaTotal ************++*********************/

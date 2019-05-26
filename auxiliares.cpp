@@ -32,6 +32,10 @@ nombre obtenerNombre(celda c) {
     return get<2>(c);
 }
 
+double velocidad(tuple<tiempo,gps> p1 , tuple<tiempo,gps> p2){
+     return ((distEnKM(obtenerPosicion(p1),obtenerPosicion(p2))) / (obtenerTiempo(p1) - obtenerTiempo(p2)));
+}
+
 double distMts(gps posicion1, gps posicion2){
     return distEnKM(posicion1, posicion2) * 1000;
 }
@@ -79,4 +83,24 @@ gps puntoGps(double latitud, double longitud) {
 
 tuple<tiempo, gps> medicion(tiempo t, gps g) {
     return make_tuple(t, g);
+}
+
+double maximoTiempo (viaje v){
+    double Tmax = 0.0;
+    for (int i = 0; i < v.size() ; ++i) {
+        if( (get<0> v[i]) >= Tmax ){
+            Tmax= get<0> v[i];
+        }
+    }
+    return Tmax;
+}
+
+double minimoTiempo (viaje v){
+    double Tmin = 0.0;
+    for (int i = 0; i < v.size() ; ++i) {
+        if( (get<0> v[i]) <= Tmin ){
+            Tmin= get<0> v[i];
+        }
+    }
+    return Tmin;
 }
