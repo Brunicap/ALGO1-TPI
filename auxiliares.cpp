@@ -38,8 +38,8 @@ nombre nombreEnGrilla (gps posicion, grilla g){
     nombre res;
 
     for (int i = 0; i < g.size() ; ++i) {
-        if((latitudPos == get<0> g[i]) && (longitudPos == get<1> g[i])){
-            res = get<2> g[i];
+        if((latitudPos == obtenerLatitud(get<0>(g[i]))) && (longitudPos == obtenerLongitud(get<1>(g[i])))){
+            res = get<2>(g[i]);
         }
     }
     return res;
@@ -98,22 +98,52 @@ tuple<tiempo, gps> medicion(tiempo t, gps g) {
     return make_tuple(t, g);
 }
 
-double maximoTiempo (viaje v){
+
+
+
+
+
+
+
+tiempo maximoTiempo (viaje v){
     double Tmax = 0.0;
     for (int i = 0; i < v.size() ; ++i) {
-        if( (get<0> v[i]) >= Tmax ){
-            Tmax= get<0> v[i];
+        if( (get<0>(v[i])) >= Tmax ){
+            Tmax= get<0>(v[i]);
         }
     }
     return Tmax;
 }
 
-double minimoTiempo (viaje v){
+tiempo minimoTiempo (viaje v){
     double Tmin = 0.0;
     for (int i = 0; i < v.size() ; ++i) {
-        if( (get<0> v[i]) <= Tmin ){
-            Tmin= get<0> v[i];
+        if( (get<0>(v[i])) <= Tmin ){
+            Tmin= get<0>(v[i]);
         }
     }
     return Tmin;
+}
+
+
+
+
+
+
+tuple<tiempo, gps> encontrarAnterior(viaje& v, int i) {
+    tuple <tiempo, gps> anteriorActual = make_tuple(0.0, make_tuple(0.0, 0.0));
+    for (int h = 0; h < v.size(); h++) {
+        if (obtenerTiempo(v[h]) < obtenerTiempo(v[i]) && obtenerTiempo(v[h]) > obtenerTiempo(anteriorActual)) {
+            anteriorActual = v[h];
+        }
+
+    }
+
+    return anteriorActual;
+}
+
+
+bool viajeEnFranjaHoraria(viaje& v, tiempo t0, tiempo tf)
+{
+    return (maximoTiempo(v) < t0 || minimoTiempo(v) > tf);
 }

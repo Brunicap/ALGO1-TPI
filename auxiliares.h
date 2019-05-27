@@ -16,4 +16,20 @@ tuple<tiempo, gps> medicion(tiempo t, gps g);
 
 
 
+
+
+
+tiempo maximoTiempo (viaje v);
+tiempo minimoTiempo (viaje v);
+
+
+tuple<tiempo, gps> encontrarAnterior(viaje& v, int i);
+bool viajeEnFranjaHoraria(viaje& v, tiempo t0, tiempo tf);
+
+
+double velocidad(tuple<tiempo,gps> p1 , tuple<tiempo,gps> p2);
+
+
+
+
 #endif //TRANSPORTEURBANO_AUXILIARES_H
