@@ -46,7 +46,7 @@ nombre nombreEnGrilla (gps posicion, grilla g){
 }
 
 double velocidad(tuple<tiempo,gps> p1 , tuple<tiempo,gps> p2){
-     return ((distEnKM(obtenerPosicion(p1),obtenerPosicion(p2))) / (obtenerTiempo(p1) - obtenerTiempo(p2)));
+     return ((distEnKM(obtenerPosicion(p1),obtenerPosicion(p2))) / ((obtenerTiempo(p1) - obtenerTiempo(p2)) / 3600));
 }
 
 double distMts(gps posicion1, gps posicion2){
@@ -143,7 +143,19 @@ tuple<tiempo, gps> encontrarAnterior(viaje& v, int i) {
 }
 
 
-bool viajeEnFranjaHoraria(viaje& v, tiempo t0, tiempo tf)
-{
+bool viajeEnFranjaHoraria(viaje& v, tiempo t0, tiempo tf) {
     return (maximoTiempo(v) < t0 || minimoTiempo(v) > tf);
+}
+
+
+
+bool puntoNoEstaCubierto(viaje vOrd, distancia u, gps p){
+    bool res = false;
+    for (int i = 0; i < vOrd.size() ; ++i) {
+        if( distEnKM(i,p) >= u){
+            res = true;
+            break;
+        }
+    }
+    return res;
 }

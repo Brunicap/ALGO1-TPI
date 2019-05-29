@@ -4,15 +4,44 @@
 #include <algorithm>
 #include <fstream>
 #include <iomanip>
+#include <w32api/evntprov.h>
 
 using namespace std;
 
 void escribirGrilla(grilla g, string nombreArchivo){
 
+    ofstream fout;
+    fout.open("nombreArchivo");
+    if(fout.fail()){
+        cout << "error" << endl;
+    }
+
+    for (int i = 0; i < g.size() ; ++i) {
+        fout << obtenerLatitud(get<0>(g[i])) << '\t';
+        fout << obtenerLongitud(get<0>(g[i])) << '\t';
+        fout << obtenerLatitud(get<1>(g[i])) << '\t';
+        fout << obtenerLongitud(get<1>(g[i])) << '\t';
+        fout << obtenerNombre(g[i]) << endl;
+    }
+    fout.close();
 }
 
 void escribirRecorridos(vector<recorrido> recorridos, string nombreArchivo){
 
+    ofstream fout;
+    fout.open("nombreArchivo");
+    if(fout.fail()){
+        cout << "error" << endl;
+    }
+
+    for (int i = 0; i < recorridos.size(); ++i) {
+        for (int j = 0; j < recorridos[i].size() ; ++j) {
+            fout << i << \t;
+            fout << obtenerLatitud(recorridos[i][j]) << '\t';
+            fout << obtenerLongitud(recorridos[i][j]) << endl;
+        }
+    }
+    fout.close();
 }
 
 /*****************************+***** EJERCICIO excesoDeVelocidad **********************************/
@@ -61,7 +90,15 @@ int flota(vector<viaje> f, tiempo t0, tiempo tf) {
 
 /************************************ EJERCICIO recorridoCubierto *******************************/
 vector<gps> recorridoNoCubierto(viaje v, recorrido r, distancia u) {
+    // faltaria ordenar v!!
+    vector<gps> res;
 
+    for (int i = 0; i < recorrido; ++i) {
+        if(puntoNoEstaCubierto(vOrd,u,recorrido[i])){
+            res.push_back(recorrido[i]);
+        }
+    }
+    return res;
 }
 
 /************************************** EJERCICIO construirGrilla *******************************/
@@ -73,7 +110,7 @@ grilla construirGrilla(gps esq1, gps esq2, int n, int m) {
 vector<nombre> aPalabra(recorrido t, grilla g) {
         vector<nombre> palabra;
         for (int i = 0; i < t.size() ; ++i) {
-            //palabra.push_back(nombreEnGrilla(t[i],g));
+            palabra.push_back(nombreEnGrilla(t[i],g));
         }
         return palabra;
 }
