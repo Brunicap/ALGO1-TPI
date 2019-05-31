@@ -19,6 +19,11 @@ tuple<tiempo, gps> medicion(tiempo t, gps g);
 
 
 
+
+
+viaje ordenarViajeBurbuja(viaje v);
+
+
 tiempo maximoTiempo (viaje v);
 tiempo minimoTiempo (viaje v);
 
@@ -30,6 +35,7 @@ bool viajeEnFranjaHoraria(viaje& v, tiempo t0, tiempo tf);
 double velocidad(tuple<tiempo,gps> p1 , tuple<tiempo,gps> p2);
 
 
+nombre nombreEnGrilla (gps posicion, grilla g);
 
 
 #endif //TRANSPORTEURBANO_AUXILIARES_H

@@ -105,6 +105,25 @@ tuple<tiempo, gps> medicion(tiempo t, gps g) {
 
 
 
+
+
+viaje ordenarViajeBurbuja(viaje v)
+{
+    //ordeno por burbuja
+    for (int i = 0; i < v.size(); i++)
+        for (int h = 0; h < v.size()-1; h++)
+        {
+            if (obtenerTiempo(v[h]) > obtenerTiempo(v[h+1]))
+            {
+                tuple<tiempo, gps> swapAux = v[h];
+                v[h] = v[h+1];
+                v[h+1] = swapAux;
+            }
+        }
+    return v;
+}
+
+
 tiempo maximoTiempo (viaje v){
     double Tmax = 0.0;
     for (int i = 0; i < v.size() ; ++i) {
@@ -133,7 +152,7 @@ tiempo minimoTiempo (viaje v){
 tuple<tiempo, gps> encontrarAnterior(viaje& v, int i) {
     tuple <tiempo, gps> anteriorActual = make_tuple(0.0, make_tuple(0.0, 0.0));
     for (int h = 0; h < v.size(); h++) {
-        if (obtenerTiempo(v[h]) < obtenerTiempo(v[i]) && obtenerTiempo(v[h]) > obtenerTiempo(anteriorActual)) {
+        if (h!=i && obtenerTiempo(v[h]) < obtenerTiempo(v[i]) && obtenerTiempo(v[h]) > obtenerTiempo(anteriorActual)) {
             anteriorActual = v[h];
         }
 
