@@ -21,32 +21,15 @@ tiempo obtenerTiempo(tuple<tiempo, gps> medicion) {
 }
 
 gps obtenerEsquinaSuperior(celda c) {
-    return get<0>(c);
+    return get<1>(c);
 }
 
 gps obtenerEsquinaInferior(celda c) {
-    return get<1>(c);
+    return get<0>(c);
 }
 
 nombre obtenerNombre(celda c) {
     return get<2>(c);
-}
-
-nombre nombreEnGrilla (gps posicion, grilla g){
-    double latitudPos = obtenerLatitud(posicion);
-    double longitudPos = obtenerLongitud(posicion);
-    nombre res;
-
-    for (int i = 0; i < g.size() ; ++i) {
-        if((latitudPos == obtenerLatitud(get<0>(g[i]))) && (longitudPos == obtenerLongitud(get<1>(g[i])))){
-            res = get<2>(g[i]);
-        }
-    }
-    return res;
-}
-
-double velocidad(tuple<tiempo,gps> p1 , tuple<tiempo,gps> p2){
-     return ((distEnKM(obtenerPosicion(p1),obtenerPosicion(p2))) / ((obtenerTiempo(p1) - obtenerTiempo(p2)) / 3600));
 }
 
 double distMts(gps posicion1, gps posicion2){
@@ -107,6 +90,7 @@ tuple<tiempo, gps> medicion(tiempo t, gps g) {
 
 
 
+
 viaje ordenarViajeBurbuja(viaje v)
 {
     //ordeno por burbuja
@@ -149,19 +133,6 @@ tiempo minimoTiempo (viaje v){
 
 
 
-tuple<tiempo, gps> encontrarAnterior(viaje& v, int i) {
-    tuple <tiempo, gps> anteriorActual = make_tuple(0.0, make_tuple(0.0, 0.0));
-    for (int h = 0; h < v.size(); h++) {
-        if (h!=i && obtenerTiempo(v[h]) < obtenerTiempo(v[i]) && obtenerTiempo(v[h]) > obtenerTiempo(anteriorActual)) {
-            anteriorActual = v[h];
-        }
-
-    }
-
-    return anteriorActual;
-}
-
-
 bool viajeEnFranjaHoraria(viaje& v, tiempo t0, tiempo tf) {
     return (maximoTiempo(v) < t0 || minimoTiempo(v) > tf);
 }
@@ -171,10 +142,29 @@ bool viajeEnFranjaHoraria(viaje& v, tiempo t0, tiempo tf) {
 bool puntoNoEstaCubierto(viaje vOrd, distancia u, gps p){
     bool res = false;
     for (int i = 0; i < vOrd.size() ; ++i) {
-        if( distEnKM(i,p) >= u){
+        if( distEnKM(obtenerPosicion(vOrd[i]),p) >= u){
             res = true;
             break;
         }
     }
     return res;
+}
+
+
+nombre nombreEnGrilla (gps posicion, grilla g){
+    double latitudPos = obtenerLatitud(posicion);
+    double longitudPos = obtenerLongitud(posicion);
+    nombre res;
+
+    for (int i = 0; i < g.size() ; ++i) {
+        if((latitudPos == obtenerLatitud(get<0>(g[i]))) && (longitudPos == obtenerLongitud(get<1>(g[i])))){
+            res = get<2>(g[i]);
+        }
+    }
+    return res;
+}
+
+
+double velocidad(tuple<tiempo,gps> p1 , tuple<tiempo,gps> p2){
+    return ((distEnKM(obtenerPosicion(p1),obtenerPosicion(p2))) / ((obtenerTiempo(p1) - obtenerTiempo(p2)) / 3600));
 }

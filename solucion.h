@@ -1,6 +1,7 @@
 #ifndef TRANSPORTEURBANO_SOLUCION_H
 #define TRANSPORTEURBANO_SOLUCION_H
 #include "definiciones.h"
+
 bool excesoDeVelocidad(viaje v);
 tiempo tiempoTotal(viaje v);
 distancia distanciaTotal(viaje v);
