@@ -21,7 +21,9 @@ void escribirGrilla(grilla g, string nombreArchivo){
         fout << obtenerLongitud(get<0>(g[i])) << '\t';
         fout << obtenerLatitud(get<1>(g[i])) << '\t';
         fout << obtenerLongitud(get<1>(g[i])) << '\t';
-        fout << get<0>(get<2>(g[i])) << get<1>(get<2>(g[i])) << endl;
+        fout << "(" << get<0>(get<2>(g[i])) << "," << get<1>(get<2>(g[i])) << ")" << endl;
+
+        //con " "? consultar!
     }
     fout.close();
 }
