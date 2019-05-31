@@ -139,15 +139,16 @@ bool viajeEnFranjaHoraria(viaje& v, tiempo t0, tiempo tf) {
 
 
 
-bool puntoNoEstaCubierto(viaje vOrd, distancia u, gps p){
-    bool res = false;
-    for (int i = 0; i < vOrd.size() ; ++i) {
-        if( distEnKM(obtenerPosicion(vOrd[i]),p) >= u){
-            res = true;
-            break;
-        }
+bool puntoCubierto(viaje v, distancia u, gps p){
+    int i = 0;
+    while (i < v.size() &&  (distMts(obtenerPosicion(v[i]),p) >= u)) {
+        i++;
     }
-    return res;
+
+    //o podría ser
+    //for (int i = 0; i < vOrd.size() && distEnKM(obtenerPosicion(vOrd[i]),p) > u; i++);
+
+    return (i < v.size());
 }
 
 

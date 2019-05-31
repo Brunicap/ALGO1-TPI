@@ -99,12 +99,13 @@ int flota(vector<viaje> f, tiempo t0, tiempo tf) {
 vector<gps> recorridoNoCubierto(viaje v, recorrido r, distancia u) {
 
     //ordenar viaje por O(n2)
-    viaje vOrd = ordenarViajeBurbuja(v);
+    //viaje vOrd = ordenarViajeBurbuja(v);
+    //NO HACE FALTA ordenar el viaje aca!! ver después
 
     vector<gps> res;
 
     for (int i = 0; i < r.size(); ++i) {
-        if(puntoNoEstaCubierto(vOrd, u, r[i])){
+        if(!puntoCubierto(v, u, r[i])){
             res.push_back(r[i]);
         }
     }

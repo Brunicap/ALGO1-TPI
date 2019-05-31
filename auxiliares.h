@@ -38,7 +38,7 @@ double velocidad(tuple<tiempo,gps> p1 , tuple<tiempo,gps> p2);
 nombre nombreEnGrilla (gps posicion, grilla g);
 
 
-bool puntoNoEstaCubierto(viaje vOrd, distancia u, gps p);
+bool puntoCubierto(viaje vOrd, distancia u, gps p);
 
 
 #endif //TRANSPORTEURBANO_AUXILIARES_H
