@@ -4,7 +4,6 @@
 #include <algorithm>
 #include <fstream>
 #include <iomanip>
-//#include <w32api/evntprov.h>
 
 using namespace std;
 

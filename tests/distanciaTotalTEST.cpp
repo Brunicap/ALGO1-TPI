@@ -27,6 +27,7 @@ TEST(distanciaTotalTEST, viajeDesordenado){
 
     EXPECT_NEAR(distanciaTotal(v), 4.0, 0.01);
 }
+
 TEST(distanciaTotalTEST, viajeParado){
     gps p1 = puntoGps(-33, -34);
 

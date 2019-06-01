@@ -119,8 +119,8 @@ tiempo maximoTiempo (viaje v){
 }
 
 tiempo minimoTiempo (viaje v){
-    double Tmin = 0.0;
-    for (int i = 0; i < v.size() ; ++i) {
+    double Tmin = (get<0>(v[0]));
+    for (int i = 1; i < v.size() ; ++i) {
         if( (get<0>(v[i])) <= Tmin ){
             Tmin= get<0>(v[i]);
         }
@@ -134,7 +134,7 @@ tiempo minimoTiempo (viaje v){
 
 
 bool viajeEnFranjaHoraria(viaje& v, tiempo t0, tiempo tf) {
-    return (maximoTiempo(v) < t0 || minimoTiempo(v) > tf);
+    return !(maximoTiempo(v) < t0 || minimoTiempo(v) > tf);
 }
 
 
@@ -167,5 +167,5 @@ nombre nombreEnGrilla (gps posicion, grilla g){
 
 
 double velocidad(tuple<tiempo,gps> p1 , tuple<tiempo,gps> p2){
-    return ((distEnKM(obtenerPosicion(p1),obtenerPosicion(p2))) / ((obtenerTiempo(p1) - obtenerTiempo(p2)) / 3600));
+    return ((distEnKM(obtenerPosicion(p1),obtenerPosicion(p2))) / ((obtenerTiempo(p2) - obtenerTiempo(p1)) / 3600));
 }
