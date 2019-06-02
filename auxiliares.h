@@ -28,7 +28,6 @@ tiempo maximoTiempo (viaje v);
 tiempo minimoTiempo (viaje v);
 
 
-tuple<tiempo, gps> encontrarAnterior(viaje& v, int i);
 bool viajeEnFranjaHoraria(viaje& v, tiempo t0, tiempo tf);
 
 
