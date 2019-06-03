@@ -18,7 +18,6 @@ TEST(cantidadDeSaltosTEST, viajeOrdenadoSinSalto){
     gps esq1 = puntoGps(0,0);
     gps esq2 = puntoGps(3,3);
     grilla g = construirGrilla(esq1,esq2,n,m);
-    vector<nombre> palabra = aPalabra(recorridoDeV(v),g);
 
     int res = cantidadDeSaltos(g,v);
 
@@ -41,6 +40,11 @@ TEST(cantidadDeSaltosTEST, viajeOrdenadoConSalto){
     grilla g = construirGrilla(esq1,esq2,n,m);
 
     int res = cantidadDeSaltos(g,v);
+
+
+    recorrido t = {p1, p2, p3};
+    escribirRecorridos({t}, "recorridos.csv");
+    escribirGrilla(g, "grilla.csv");
 
     EXPECT_EQ(res,1);
 }

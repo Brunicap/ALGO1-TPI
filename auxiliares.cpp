@@ -154,17 +154,18 @@ nombre nombreEnGrilla (gps posicion, grilla g){
 
     //nombre en grilla puede tener problemas. Debatir:
         //retorna basura si no encuentra el nombre (el recorrido siempre está en la grilla? discutir)
-        //la forma de chequeo está mal, debería ser un rango? No un == (además siempre es peligroso usar == con float o double)
 
     double latitudPos = obtenerLatitud(posicion);
     double longitudPos = obtenerLongitud(posicion);
     nombre res;
 
-    for (int i = 0; i < g.size() ; ++i) {
-        if( (obtenerLatitud(obtenerEsquinaInferior(g[i])) <= latitudPos < obtenerLatitud(obtenerEsquinaSuperior(g[i])))
-            && (obtenerLongitud(obtenerEsquinaInferior(g[i])) <= longitudPos < obtenerLongitud(obtenerEsquinaSuperior(g[i])))){
+    for (int i = 0; i < g.size(); ++i) {
+        gps esqInf = obtenerEsquinaInferior(g[i]);
+        gps esqSup = obtenerEsquinaSuperior(g[i]);
 
-           return res = get<2>(g[i]);
+        if(obtenerLatitud(esqInf) <= latitudPos && latitudPos < obtenerLatitud(esqSup) &&
+        obtenerLongitud(esqInf) <= longitudPos && longitudPos < obtenerLongitud(esqSup)){
+           res = obtenerNombre(g[i]);
         }
     }
     return res;
@@ -198,6 +199,5 @@ recorrido obtenerRecorrido(viaje v) {
 }
 
 int distanciaEntreCeldas(nombre n1, nombre n2){
-    return abs(get<0>(n1) - get<0>(n2) + abs(get<1>(n1) - get<1>(n2)) - 1);
-
+    return abs(get<0>(n1) - get<0>(n2)) + abs(get<1>(n1) - get<1>(n2)) - 1;
 }

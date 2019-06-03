@@ -13,6 +13,7 @@ void escribirGrilla(grilla g, string nombreArchivo){
     fout.open(nombreArchivo);
     if(fout.fail()){
         cout << "error" << endl;
+        return;
     }
 
     for (int i = 0; i < g.size() ; ++i) {
@@ -31,6 +32,7 @@ void escribirRecorridos(vector<recorrido> recorridos, string nombreArchivo){
     fout.open(nombreArchivo);
     if(fout.fail()){
         cout << "error" << endl;
+        return;
     }
 
     for (int i = 0; i < recorridos.size(); ++i) {
@@ -139,7 +141,7 @@ int cantidadDeSaltos(grilla g, viaje v) {
 
     for (int i = 1; i < palabra.size(); i++)
     {
-        if (distanciaEntreCeldas(palabra[i-1], palabra[i]) > 1)
+        if (distanciaEntreCeldas(palabra[i-1], palabra[i]) >= 1)
             cantSaltos++;
     }
 
