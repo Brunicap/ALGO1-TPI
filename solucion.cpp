@@ -95,11 +95,7 @@ int flota(vector<viaje> f, tiempo t0, tiempo tf) {
 /************************************ EJERCICIO recorridoCubierto *******************************/
 vector<gps> recorridoNoCubierto(viaje v, recorrido r, distancia u) {
 
-    //ordenar viaje por O(n2)
-    //viaje vOrd = ordenarViajeBurbuja(v);
-    //NO HACE FALTA ordenar el viaje aca!! ver después
-
-    vector<gps> res;
+    recorrido res;
 
     for (int i = 0; i < r.size(); ++i) {
         if(!puntoCubierto(v, u, r[i])){
@@ -133,16 +129,21 @@ grilla construirGrilla(gps esq1, gps esq2, int n, int m) {
 
 /***************************************** EJERCICIO aPalabra **********************************/
 vector<nombre> aPalabra(recorrido t, grilla g) {
-        vector<nombre> palabra;
-        for (int i = 0; i < t.size() ; ++i) {
-            palabra.push_back(nombreEnGrilla(t[i],g));
-        }
-        return palabra;
+        return obtenerPalabra(t, g);
 }
 
 /************************************* EJERCICIO cantidadDeSaltos ******************************/
 int cantidadDeSaltos(grilla g, viaje v) {
-    v = ordenarViajeBurbuja(v);
+    int cantSaltos = 0;
 
-    
+    recorrido r = obtenerRecorrido(v);
+    vector<nombre> palabra = obtenerPalabra (r, g);
+
+    for (int i = 1; i < palabra.size(); i++)
+    {
+        if (distanciaEntreCeldas(palabra[i-1], palabra[i]) > 1)
+            cantSaltos++;
+    }
+
+    return cantSaltos;
 }

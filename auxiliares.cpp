@@ -108,21 +108,23 @@ viaje ordenarViajeBurbuja(viaje v)
 }
 
 
-tiempo maximoTiempo (viaje v){
-    double Tmax = 0.0;
-    for (int i = 0; i < v.size() ; ++i) {
-        if( (get<0>(v[i])) >= Tmax ){
-            Tmax= get<0>(v[i]);
+tiempo maximoTiempo (viaje& v){
+    double Tmax = obtenerTiempo(v[0]);
+
+    for (int i = 1; i < v.size(); ++i) {
+        if(obtenerTiempo(v[i]) > Tmax){
+            Tmax = obtenerTiempo(v[i]);
         }
     }
     return Tmax;
 }
 
-tiempo minimoTiempo (viaje v){
-    double Tmin = (get<0>(v[0]));
-    for (int i = 1; i < v.size() ; ++i) {
-        if( (get<0>(v[i])) <= Tmin ){
-            Tmin= get<0>(v[i]);
+tiempo minimoTiempo (viaje& v){
+    double Tmin = obtenerTiempo(v[0]);
+
+    for (int i = 1; i < v.size(); ++i) {
+        if(obtenerTiempo(v[i]) < Tmin){
+            Tmin= obtenerTiempo(v[i]);
         }
     }
     return Tmin;
@@ -144,15 +146,16 @@ bool puntoCubierto(viaje v, distancia u, gps p){
     while (i < v.size() &&  (distMts(obtenerPosicion(v[i]),p) >= u)) {
         i++;
     }
-
-    //o podría ser
-    //for (int i = 0; i < vOrd.size() && distEnKM(obtenerPosicion(vOrd[i]),p) > u; i++);
-
     return (i < v.size());
 }
 
 
 nombre nombreEnGrilla (gps posicion, grilla g){
+
+    //nombre en grilla puede tener problemas. Debatir:
+        //retorna basura si no encuentra el nombre (el recorrido siempre está en la grilla? discutir)
+        //la forma de chequeo está mal, debería ser un rango? No un == (además siempre es peligroso usar == con float o double)
+
     double latitudPos = obtenerLatitud(posicion);
     double longitudPos = obtenerLongitud(posicion);
     nombre res;
@@ -168,4 +171,32 @@ nombre nombreEnGrilla (gps posicion, grilla g){
 
 double velocidad(tuple<tiempo,gps> p1 , tuple<tiempo,gps> p2){
     return ((distEnKM(obtenerPosicion(p1),obtenerPosicion(p2))) / ((obtenerTiempo(p2) - obtenerTiempo(p1)) / 3600));
+}
+
+
+
+int distanciaEntreCeldas(nombre n1, nombre n2)
+{
+    return abs(get<0>(n1) - get<0>(n2)) + abs(get<1>(n1) - get<1>(n2)) + 1;
+}
+
+
+vector<nombre> obtenerPalabra(recorrido t, grilla g)
+{
+    vector<nombre> palabra;
+    for (int i = 0; i < t.size(); ++i) {
+        palabra.push_back(nombreEnGrilla(t[i],g));
+    }
+
+    return palabra;
+}
+
+
+recorrido obtenerRecorrido(viaje v)
+{
+    viaje vOrd = ordenarViajeBurbuja(v);
+
+    recorrido r;
+    for (int i = 0; i < vOrd.size(); i++) r.push_back(obtenerPosicion(vOrd[i]));
+    return r;
 }

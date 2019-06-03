@@ -24,8 +24,8 @@ tuple<tiempo, gps> medicion(tiempo t, gps g);
 viaje ordenarViajeBurbuja(viaje v);
 
 
-tiempo maximoTiempo (viaje v);
-tiempo minimoTiempo (viaje v);
+tiempo maximoTiempo (viaje& v);
+tiempo minimoTiempo (viaje& v);
 
 
 bool viajeEnFranjaHoraria(viaje& v, tiempo t0, tiempo tf);
@@ -38,6 +38,18 @@ nombre nombreEnGrilla (gps posicion, grilla g);
 
 
 bool puntoCubierto(viaje vOrd, distancia u, gps p);
+
+
+nombre encontrarNombreEnGrilla(gps posicion);
+
+
+int distanciaEntreCeldas(nombre n1, nombre n2);
+
+
+vector<nombre> obtenerPalabra(recorrido t, grilla g);
+
+
+recorrido obtenerRecorrido(viaje v);
 
 
 #endif //TRANSPORTEURBANO_AUXILIARES_H
