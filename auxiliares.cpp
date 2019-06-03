@@ -161,8 +161,10 @@ nombre nombreEnGrilla (gps posicion, grilla g){
     nombre res;
 
     for (int i = 0; i < g.size() ; ++i) {
-        if((latitudPos == obtenerLatitud(get<0>(g[i]))) && (longitudPos == obtenerLongitud(get<1>(g[i])))){
-            res = get<2>(g[i]);
+        if( (obtenerLatitud(obtenerEsquinaInferior(g[i])) <= latitudPos < obtenerLatitud(obtenerEsquinaSuperior(g[i])))
+            && (obtenerLongitud(obtenerEsquinaInferior(g[i])) <= longitudPos < obtenerLongitud(obtenerEsquinaSuperior(g[i])))){
+
+           return res = get<2>(g[i]);
         }
     }
     return res;
@@ -173,12 +175,6 @@ double velocidad(tuple<tiempo,gps> p1 , tuple<tiempo,gps> p2){
     return ((distEnKM(obtenerPosicion(p1),obtenerPosicion(p2))) / ((obtenerTiempo(p2) - obtenerTiempo(p1)) / 3600));
 }
 
-
-
-int distanciaEntreCeldas(nombre n1, nombre n2)
-{
-    return abs(get<0>(n1) - get<0>(n2)) + abs(get<1>(n1) - get<1>(n2)) + 1;
-}
 
 
 vector<nombre> obtenerPalabra(recorrido t, grilla g)
@@ -192,11 +188,16 @@ vector<nombre> obtenerPalabra(recorrido t, grilla g)
 }
 
 
-recorrido obtenerRecorrido(viaje v)
-{
+recorrido obtenerRecorrido(viaje v) {
     viaje vOrd = ordenarViajeBurbuja(v);
 
     recorrido r;
     for (int i = 0; i < vOrd.size(); i++) r.push_back(obtenerPosicion(vOrd[i]));
     return r;
+
+}
+
+int distanciaEntreCeldas(nombre n1, nombre n2){
+    return abs(get<0>(n1) - get<0>(n2) + abs(get<1>(n1) - get<1>(n2)) - 1);
+
 }

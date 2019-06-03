@@ -108,16 +108,14 @@ vector<gps> recorridoNoCubierto(viaje v, recorrido r, distancia u) {
 /************************************** EJERCICIO construirGrilla *******************************/
 grilla construirGrilla(gps esq1, gps esq2, int n, int m) {
 
-    //ver bien después con un test los + y - para lat y long
-
     grilla gOut;
     double deltaLat = fabs(obtenerLatitud(esq1) - obtenerLatitud(esq2));
     double deltaLong = fabs(obtenerLongitud(esq1) - obtenerLongitud(esq2));
     for (int i = 1; i <= n; i++)
         for (int j = 1; j <= m; j++)
         {
-            gps e1 = puntoGps(obtenerLatitud(esq1) + deltaLat * i, obtenerLongitud(esq1) + deltaLong * j);
-            gps e2 = puntoGps(obtenerLatitud(esq1) + deltaLat * (i+1), obtenerLongitud(esq1) + deltaLong * (j+1));
+            gps e1 = puntoGps(obtenerLatitud(esq1) + (deltaLat / n) * (i-1), obtenerLongitud(esq1) + (deltaLong / m) * (j-1));
+            gps e2 = puntoGps(obtenerLatitud(esq1) + (deltaLat / n) * i, obtenerLongitud(esq1) + (deltaLong / m) * j);
 
             nombre name = make_tuple(i, j);
             celda c = make_tuple(e1, e2, name);

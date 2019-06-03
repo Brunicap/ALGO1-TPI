@@ -39,6 +39,9 @@ nombre nombreEnGrilla (gps posicion, grilla g);
 
 bool puntoCubierto(viaje vOrd, distancia u, gps p);
 
+vector<gps> recorridoDeV(viaje vOrd);
+
+int distanciaEntreCeldas(nombre n1, nombre n2);
 
 nombre encontrarNombreEnGrilla(gps posicion);
 
