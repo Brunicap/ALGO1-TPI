@@ -21,7 +21,7 @@ tuple<tiempo, gps> medicion(tiempo t, gps g);
 
 
 
-viaje ordenarViajeBurbuja(viaje v);
+/*viaje ordenarViajeBurbuja(viaje v);
 
 
 tiempo maximoTiempo (viaje& v);
@@ -52,7 +52,7 @@ int distanciaEntreCeldas(nombre n1, nombre n2);
 vector<nombre> obtenerPalabra(recorrido t, grilla g);
 
 
-recorrido obtenerRecorrido(viaje v);
+recorrido obtenerRecorrido(viaje v);*/
 
 
 #endif //TRANSPORTEURBANO_AUXILIARES_H

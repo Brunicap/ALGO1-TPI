@@ -26,7 +26,7 @@ TEST(cantidadDeSaltosTEST, viajeOrdenadoSinSalto){
 
 TEST(cantidadDeSaltosTEST, viajeOrdenadoConSalto){
     gps p1 = puntoGps(0,0);
-    gps p2 = puntoGps(2.5,0);
+    gps p2 = puntoGps(2.9,2.9);
     gps p3 = puntoGps(1.5,1.5);
 
     viaje v = {medicion(1.5, p1),
@@ -40,11 +40,6 @@ TEST(cantidadDeSaltosTEST, viajeOrdenadoConSalto){
     grilla g = construirGrilla(esq1,esq2,n,m);
 
     int res = cantidadDeSaltos(g,v);
-
-
-    recorrido t = {p1, p2, p3};
-    escribirRecorridos({t}, "recorridos.csv");
-    escribirGrilla(g, "grilla.csv");
 
     EXPECT_EQ(res,1);
 }
@@ -71,17 +66,17 @@ TEST(cantidadDeSaltosTEST, viajeDesordenadoSinSalto){
 
 TEST(cantidadDeSaltosTEST, viajeDesordenadoConSalto){
     gps p1 = puntoGps(0,0);
-    gps p2 = puntoGps(2.5,0);
+    gps p2 = puntoGps(4.0,4.0);
     gps p3 = puntoGps(1.5,1.5);
 
     viaje v = {medicion(1.6, p2),
                medicion(1.5, p1),
                medicion(1.7, p3)};
 
-    int n = 3;
-    int m = 3;
+    int n = 4;
+    int m = 4;
     gps esq1 = puntoGps(0,0);
-    gps esq2 = puntoGps(3,3);
+    gps esq2 = puntoGps(4,4);
     grilla g = construirGrilla(esq1,esq2,n,m);
 
     int res = cantidadDeSaltos(g,v);

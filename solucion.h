@@ -19,6 +19,4 @@ void escribirRecorridos(vector<recorrido> recorridos, string nombreArchivo);
 void completarHuecos(viaje& v, vector<int> faltantes);
 
 
-
-
 #endif //TRANSPORTEURBANO_SOLUCION_H
